@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  -
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/20bc52809b.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>password-generator</title>
+  </head>
+  <body
+    class="box-border flex justify-start items-center flex-col bg-slate-200"
+  >
+    <!-- nav bar  -->
+    <nav
+      class="w-11/12 lg:w-10/12 xl:w-8/12 2xl:w-1/2 py-4 px-2 pb-8 border-b border-black flex justify-between items-center"
+    >
+      <div>
+        <h1 class="inline-block text-2xl">🔑</h1>
+        <span class="text-2xl font-bold">StrongPass</span>
+      </div>
+      <div>
+        <a
+          href="https://github.com/Kei-K23"
+          target="_blank"
+          class="p-1 bg-blue-400 rounded-lg transition-all hover:bg-blue-600 hover:text-slate-200"
+        >
+          Follow Me
+          <i class="fa-brands fa-github text-xl"></i>
+        </a>
+      </div>
+    </nav>
+
+    <!-- main section  -->
+    <section class="w-11/12 lg:w-10/12 xl:w-8/12 2xl:w-1/2 mt-10">
+      <h1 class="text-center text-xl mb-8 font-bold">
+        Generate strong password
+      </h1>
+      <!-- generate password  -->
+      <form class="grid grid-cols-1 gap-2 md:grid-cols-2">
+        <div>password length:</div>
+        <div>
+          <select
+            class="w-1/2 border-2 border-black"
+            name="passLength"
+            id="passLength"
+            title="select password length"
+          >
+            <optgroup label="Weak">
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+            </optgroup>
+            <optgroup label="Medium">
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+            </optgroup>
+            <optgroup label="Strong">
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+            </optgroup>
+          </select>
+        </div>
+        <div>Include Lowercase character:</div>
+        <div>
+          <label>
+            <input type="checkbox" id="lowercase" name="lowercase" checked />
+            (e.g. abcdefg)
+          </label>
+        </div>
+
+        <div>Include Uppercase character:</div>
+        <div>
+          <label>
+            <input type="checkbox" id="uppercase" name="uppercase" checked />
+            (e.g. ABCDEFG)
+          </label>
+        </div>
+
+        <div>Include Number:</div>
+        <div>
+          <label>
+            <input type="checkbox" id="number" name="number" checked />
+            (e.g. 12345)
+          </label>
+        </div>
+
+        <div>Include Symbols:</div>
+        <div>
+          <label>
+            <input type="checkbox" id="symbols" name="symbols" />
+            (e.g. !@#$%)
+          </label>
+        </div>
+        <div>
+          <button
+            title="generate password"
+            class="border-2 border-black px-2 rounded-md mr-4 p-1 transition-all hover:border-slate-400 hover:bg-slate-400 active:bg-slate-500"
+            id="generate"
+          >
+            generate password
+          </button>
+          <button
+            title="copy password"
+            class="border-2 border-black px-2 rounded-md p-1 transition-all hover:border-slate-400 hover:bg-slate-400 active:bg-slate-500"
+            data-copy="copy"
+          >
+            copy
+          </button>
+        </div>
+      </form>
+
+      <!-- result container  -->
+      <div class="w-full mt-4 grid grid-cols-1 gap-2 md:grid-cols-2">
+        <label>Your generated password: </label>
+        <div>
+          <input
+            type="text"
+            placeholder="Your generated password will appear here"
+            id="result"
+            class="placeholder:text-green-700 w-8/12 p-1 border-2 border-black"
+            readonly
+          />
+          <button
+            class="border-2 border-black px-2 rounded-md p-1 transition-all hover:border-slate-400 hover:bg-slate-400 active:bg-slate-500"
+            data-copy="copy"
+            title="copy password"
+          >
+            copy
+          </button>
+        </div>
+      </div>
+
+      <div class="w-full mt-4 grid grid-cols-1 gap-2 md:grid-cols-2">
+        <label>Password remember shortcut: </label>
+        <p id="rememberPass">
+          There is no password to remember! Please generate one
+        </p>
+      </div>
+
+      <div class="w-full mt-4 md:grid-cols-2">
+        <label
+          title="save your password"
+          for="checkToSave"
+          id="labelEleForSavePassword"
+        >
+          Save password:
+        </label>
+        <input
+          type="checkbox"
+          name="check"
+          id="checkToSave"
+          class="peer/check"
+        />
+        <div class="hidden peer-checked/check:block mt-4">
+          <input
+            type="text"
+            placeholder="name your password"
+            id="savePassName"
+            class="w-8/12 p-1 border-2 border-black"
+          />
+          <button
+            class="border-2 border-black px-2 rounded-md p-1 transition-all hover:border-slate-400 hover:bg-slate-400 active:bg-slate-500"
+            data-save="save"
+            title="save password"
+          >
+            save
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- save password with name  -->
+    <section class="w-11/12 lg:w-10/12 xl:w-8/12 2xl:w-1/2 mt-8">
+      <h2 class="text-center font-semibold">All your saved password</h2>
+      <div
+        class="flex justify-between px-4 py-2 border border-b-0 border-black"
+      >
+        <p class="namePass font-semibold">Name of your password</p>
+        <p class="font-semibold">Password</p>
+      </div>
+      <ul id="name-password-container" class="border border-black"></ul>
+    </section>
+
+    <!-- information about strong password  -->
+    <section class="w-11/12 lg:w-10/12 xl:w-8/12 2xl:w-1/2 mt-8">
+      <div class="border-t border-black">
+        <h2 class="font-semibold text-xl text-center my-4">
+          The important of having strong password
+        </h2>
+        <ul>
+          <li class="mb-2">
+            <span class="font-semibold">Security:</span> A strong password helps
+            protect your personal and sensitive information from unauthorized
+            access. It reduces the risk of your accounts being hacked or
+            compromised by malicious individuals or automated programs.
+          </li>
+          <li class="mb-2">
+            <span class="font-semibold">Data Privacy:</span> Strong passwords
+            add an extra layer of security to your personal data, such as
+            financial information, private messages, or personal documents. A
+            weak password can make it easier for others to access and misuse
+            your private information.
+          </li>
+          <li class="mb-2">
+            <span class="font-semibold">Account Protection:</span> Using a
+            strong password makes it more difficult for attackers to guess or
+            crack your password through methods like brute force attacks or
+            dictionary attacks. It helps safeguard your accounts across various
+            online services, including email, banking, social media, and more.
+          </li>
+          <li class="mb-2">
+            <span class="font-semibold">Preventing Unauthorized Access:</span>
+            Strong passwords help prevent unauthorized access to your devices,
+            such as smartphones, laptops, or tablets. This is especially crucial
+            if you store sensitive information or have access to company
+            resources on your devices.
+          </li>
+          <li class="mb-2">
+            <span class="font-semibold">Compliance Requirements:</span> Certain
+            organizations or services may have password requirements or policies
+            in place to ensure data security. By using a strong password, you
+            can comply with these requirements and protect yourself and the
+            systems you use.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- footer  -->
+    <footer
+      class="mt-4 text-lg w-11/12 flex py-4 gap-4 justify-center flex-col items-center border-t border-black"
+    >
+      <p>&copy; 2023 password-generator@Kei-K. All rights reserved.</p>
+      <p>
+        Create with &#128153; by
+        <a
+          class="p-1 bg-blue-400 rounded-lg transition-all hover:bg-blue-600 hover:text-slate-200"
+          href="https://github.com/Kei-K23"
+          target="_blank"
+        >
+          Kei-K
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </p>
+    </footer>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
